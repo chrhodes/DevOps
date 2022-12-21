@@ -1,6 +1,4 @@
-﻿using System;
-using System.CommandLine;
-using System.Xml;
+﻿using System.CommandLine;
 
 namespace ConsoleApp2
 {
@@ -8,12 +6,24 @@ namespace ConsoleApp2
     {
         static async Task<int> Main(string[] args)
         {
-            var rootCommand = new RootCommand("Sample app for learning Docker");
+            // NOTE(crhodes)
+            // Check if Environment Variables are set
+
+            var envAppTitle = Environment.GetEnvironmentVariable("APPNAME");
+
+            var debugOutput = Environment.GetEnvironmentVariable("APPDEBUG") !=  null;
+
+            var appTitle = envAppTitle == null ? "SampleApp for learning Docker" : envAppTitle;
+
+            var rootCommand = new RootCommand(appTitle);
 
             var loop = true;
 
             rootCommand.SetHandler(() =>
             {
+                
+                Console.WriteLine(rootCommand.Description);
+
                 Console.WriteLine("Enter two numbers.  Any non-numeric value exits");
 
                 while (loop)
@@ -26,7 +36,8 @@ namespace ConsoleApp2
 
                     if (!int.TryParse(input1, out number1) )
                     {
-                        Console.Error.WriteLine($"Cannot parse {input1} as number");
+                        if (debugOutput) { Console.Error.WriteLine($"Cannot parse >{input1}< as number"); }
+                        
                         loop = false;
                     }
                     else
@@ -36,7 +47,7 @@ namespace ConsoleApp2
 
                         if (!int.TryParse(input2, out number2))
                         {
-                            Console.Error.WriteLine($"Cannot parse {input2} as number");
+                            if (debugOutput) { Console.Error.WriteLine($"Cannot parse >{input2}< as number"); }
                             loop = false;
                         }
                         else
