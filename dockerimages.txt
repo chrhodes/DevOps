@@ -1,0 +1,132 @@
+mcr.microsoft.com/dotnet/framework/aspnet    4.8                              65767307ab55   4 weeks ago     15.2GB
+mcr.microsoft.com/dotnet/framework/aspnet    3.5-windowsservercore-ltsc2019   338415536839   4 weeks ago     7.94GB
+mcr.microsoft.com/dotnet/framework/aspnet    4.8-windowsservercore-ltsc2019   828e8fa2b4fd   4 weeks ago     8.75GB
+mcr.microsoft.com/dotnet/framework/sdk       4.8-windowsservercore-ltsc2019   e775fca1616d   4 weeks ago     12.7GB
+mcr.microsoft.com/dotnet/framework/runtime   4.8-windowsservercore-ltsc2019   c122432c1fb7   4 weeks ago     8.18GB
+mcr.microsoft.com/dotnet/runtime             6.0                              c8015a703a14   4 weeks ago     331MB
+mcr.microsoft.com/windows/servercore         ltsc2019                         4503e186c64d   4 weeks ago     5.68GB
+mcr.microsoft.com/windows/nanoserver         1809                             c89127473dbd   4 weeks ago     258MB
+
+C:\Users\crhodes> docker pull mcr.microsoft.com/windows/servercore:ltsc2019
+ltsc2019: Pulling from windows/servercore
+b111c3320c94: Pull complete
+d3e1bcee8808: Pull complete
+Digest: sha256:cbb8b0a709b4e0868cd2e30b1485358197b1021bb0dd4261e36b3af3ca48fd0b
+Status: Downloaded newer image for mcr.microsoft.com/windows/servercore:ltsc2019
+mcr.microsoft.com/windows/servercore:ltsc2019
+
+C:\Users\crhodes> docker pull mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2019
+4.8-windowsservercore-ltsc2019: Pulling from dotnet/framework/runtime
+b111c3320c94: Already exists
+d3e1bcee8808: Already exists
+1e619cc2537c: Pull complete
+4a364a2d0d5a: Pull complete
+Digest: sha256:b2cbe723da778249a0f5557d07616f5cac6ee1ef4e79094da4e49911d70f195c
+Status: Downloaded newer image for mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2019
+mcr.microsoft.com/dotnet/framework/runtime:4.8-windowsservercore-ltsc2019
+
+C:\Users\crhodes> docker pull mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
+4.8-windowsservercore-ltsc2019: Pulling from dotnet/framework/aspnet
+b111c3320c94: Already exists
+d3e1bcee8808: Already exists
+1e619cc2537c: Already exists
+4a364a2d0d5a: Already exists
+39452a3eaf98: Pull complete
+56ff3a317cff: Pull complete
+795b2d201a91: Pull complete
+1d967e3d3d4f: Pull complete
+e7820a1ab27d: Pull complete
+ba155a0b8667: Pull complete
+4fb1186dfa40: Pull complete
+Digest: sha256:bfcaaccdd710168f84093a9270824924c1f6da7f23399e1895b273e98d3363a7
+Status: Downloaded newer image for mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
+mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
+
+C:\Users\crhodes> docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
+4.8-windowsservercore-ltsc2019: Pulling from dotnet/framework/sdk
+b111c3320c94: Already exists
+d3e1bcee8808: Already exists
+1e619cc2537c: Already exists
+4a364a2d0d5a: Already exists
+620f80a3d187: Pull complete
+283510f13afd: Pull complete
+fe3c7e7681f2: Extracting [==================================================>]  1.742GB/1.742GB
+b42fa6aad90f: Download complete
+9eb984c8a3fe: Download complete
+17a28067c055: Download complete
+failed to register layer: re-exec error: exit status 2: output: runtime: VirtualAlloc of 32768 bytes failed with errno=1455
+fatal error: out of memory
+
+runtime stack:
+runtime.throw({0x1df097b?, 0xc001334000?})
+        /usr/local/go/src/runtime/panic.go:992 +0x76
+runtime.sysUsed(0xc001334000, 0x8000)
+        /usr/local/go/src/runtime/mem_windows.go:83 +0x1c9
+runtime.(*mheap).allocSpan(0x300f740, 0x4, 0x0, 0x87)
+        /usr/local/go/src/runtime/mheap.go:1279 +0x428
+runtime.(*mheap).alloc.func1()
+        /usr/local/go/src/runtime/mheap.go:912 +0x65
+runtime.systemstack()
+        /usr/local/go/src/runtime/asm_amd64.s:469 +0x4e
+
+goroutine 1 [running]:
+runtime.systemstack_switch()
+        /usr/local/go/src/runtime/asm_amd64.s:436 fp=0xc0004815c0 sp=0xc0004815b8 pc=0x508040
+runtime.(*mheap).alloc(0xc00005c1c0?, 0xc000211800?, 0x70?)
+        /usr/local/go/src/runtime/mheap.go:906 +0x65 fp=0xc000481608 sp=0xc0004815c0 pc=0x4c7725
+runtime.(*mcentral).grow(0x155?)
+        /usr/local/go/src/runtime/mcentral.go:244 +0x5b fp=0xc000481650 sp=0xc000481608 pc=0x4b831b
+runtime.(*mcentral).cacheSpan(0x30260b8)
+        /usr/local/go/src/runtime/mcentral.go:164 +0x30f fp=0xc0004816a8 sp=0xc000481650 pc=0x4b814f
+runtime.(*mcache).refill(0x1e4453e0a28, 0x87)
+        /usr/local/go/src/runtime/mcache.go:162 +0xaf fp=0xc0004816e0 sp=0xc0004816a8 pc=0x4b77af
+runtime.(*mcache).nextFree(0x1e4453e0a28, 0x87)
+        /usr/local/go/src/runtime/malloc.go:886 +0x85 fp=0xc000481728 sp=0xc0004816e0 pc=0x4ad525
+runtime.mallocgc(0x8000, 0x1a6ed20, 0x1)
+        /usr/local/go/src/runtime/malloc.go:1085 +0x4e5 fp=0xc0004817a0 sp=0xc000481728 pc=0x4adba5
+runtime.makeslice(0x0?, 0x213b080?, 0xc0011712f0?)
+        /usr/local/go/src/runtime/slice.go:103 +0x52 fp=0xc0004817c8 sp=0xc0004817a0 pc=0x4eded2
+io.copyBuffer({0x213b080, 0xc0011712f0}, {0x213af40, 0xc0000de000}, {0x0, 0x0, 0x0})
+        /usr/local/go/src/io/io.go:423 +0x117 fp=0xc000481848 sp=0xc0004817c8 pc=0x518e37
+io.Copy(...)
+        /usr/local/go/src/io/io.go:385
+github.com/docker/docker/vendor/github.com/Microsoft/go-winio/backuptar.WriteBackupStreamFromTarFile({0x213a200?, 0xc00005c1c0}, 0xc00125ed75?, 0xc001213500)
+        /go/src/github.com/docker/docker/vendor/github.com/Microsoft/go-winio/backuptar/tar.go:451 +0x785 fp=0xc000481b40 sp=0xc000481848 pc=0x13fd9a5
+github.com/docker/docker/daemon/graphdriver/windows.writeBackupStreamFromTarAndSaveMutatedFiles(0xc00005c1c0, {0x1e46ae8cd78?, 0xc00077a140}, 0xc0009c1e90?, 0xc001213500, {0xc0000c0e70, 0x64})
+        /go/src/github.com/docker/docker/daemon/graphdriver/windows/windows.go:724 +0x6d5 fp=0xc000481cd0 sp=0xc000481b40 pc=0x1402fd5
+github.com/docker/docker/daemon/graphdriver/windows.writeLayerFromTar({0x213e740?, 0xc000006010}, {0x2156ea8, 0xc00077a140}, {0xc0000c0e70, 0x64})
+        /go/src/github.com/docker/docker/daemon/graphdriver/windows/windows.go:761 +0x397 fp=0xc000481db0 sp=0xc000481cd0 pc=0x14035f7
+github.com/docker/docker/daemon/graphdriver/windows.writeLayer({0x213e740, 0xc000006010}, {0xc000048240, 0x23}, {0xc000046300, 0x40}, {0xc0000c4030, 0x6, 0xd})
+        /go/src/github.com/docker/docker/daemon/graphdriver/windows/windows.go:839 +0x2a5 fp=0xc000481ea0 sp=0xc000481db0 pc=0x14041a5
+github.com/docker/docker/daemon/graphdriver/windows.writeLayerReexec()
+        /go/src/github.com/docker/docker/daemon/graphdriver/windows/windows.go:795 +0x7b fp=0xc000481f10 sp=0xc000481ea0 pc=0x1403d9b
+github.com/docker/docker/pkg/reexec.Init(...)
+        /go/src/github.com/docker/docker/pkg/reexec/reexec.go:26
+main.main()
+        /go/src/github.com/docker/docker/cmd/dockerd/docker.go:72 +0x17a fp=0xc000481f80 sp=0xc000481f10 pc=0x194e77a
+runtime.main()
+        /usr/local/go/src/runtime/proc.go:250 +0x1fe fp=0xc000481fe0 sp=0xc000481f80 pc=0x4db93e
+runtime.goexit()
+        /usr/local/go/src/runtime/asm_amd64.s:1571 +0x1 fp=0xc000481fe8 sp=0xc000481fe0 pc=0x50a3a1
+
+goroutine 43 [select]:
+github.com/docker/docker/vendor/go.opencensus.io/stats/view.(*worker).start(0xc0009b2690)
+        /go/src/github.com/docker/docker/vendor/go.opencensus.io/stats/view/worker.go:154 +0xad
+created by github.com/docker/docker/vendor/go.opencensus.io/stats/view.init.0
+        /go/src/github.com/docker/docker/vendor/go.opencensus.io/stats/view/worker.go:32 +0x85
+		
+C:\Users\crhodes> docker pull mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
+4.8-windowsservercore-ltsc2019: Pulling from dotnet/framework/sdk
+b111c3320c94: Already exists
+d3e1bcee8808: Already exists
+1e619cc2537c: Already exists
+4a364a2d0d5a: Already exists
+620f80a3d187: Pull complete
+283510f13afd: Pull complete
+fe3c7e7681f2: Pull complete
+b42fa6aad90f: Pull complete
+9eb984c8a3fe: Pull complete
+17a28067c055: Pull complete
+Digest: sha256:48a48dcd38e570a4f057f58258a92a1c01b210a767c6afd3e89d3eb6ae286384
+Status: Downloaded newer image for mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
+mcr.microsoft.com/dotnet/framework/sdk:4.8-windowsservercore-ltsc2019
